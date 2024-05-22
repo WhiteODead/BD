@@ -431,19 +431,3 @@ BEGIN
         @body = @body;
 END;
 go
-
-go
-CREATE OR ALTER PROCEDURE SaveTableDataToXML
-    @tableName NVARCHAR(128)
-AS
-BEGIN
-    DECLARE @fileName NVARCHAR(128);
-    SET @fileName = REPLACE(@tableName, ' ', '') + '.xml';
-
-    DECLARE @sql NVARCHAR(1000);
-    SET @sql = 'bcp "SELECT * FROM ' + QUOTENAME(@tableName) + ' ' +
-               'FOR XML Auto" ' +
-               'queryout "e:\' + @fileName + '" ' +
-               '-c -S DESKTOP-NQBTK7E -d online-cinema-backup -T';
-    EXEC sys.XP_CMDSHELL @sql;
-END;

@@ -1,7 +1,6 @@
--- Создание представления для rand
 CREATE VIEW dbo.vRand(V) AS SELECT RAND();
 go
--- Создание функции для генерации случайных данных
+
 CREATE FUNCTION dbo.GenerateRandomString (@length INT)
 RETURNS VARCHAR(MAX)
 AS
@@ -20,7 +19,7 @@ BEGIN
 END;
 go
 
--- Вставка случайных данных в таблицу content
+
 DECLARE @counter INT = 1;
 
 WHILE @counter <= 100000
@@ -55,7 +54,7 @@ BEGIN
     SET @counter = @counter + 1;
 END;
 go
--- Процедура обновления данных
+
 CREATE PROCEDURE dbo.UpdateTitles
 AS
 BEGIN
@@ -90,7 +89,7 @@ END;
 go
 EXEC dbo.UpdateTitles;
 go
--- Процедура добавления актёров и режиссёров
+
 CREATE PROCEDURE dbo.FillPersonTable
 AS
 BEGIN
@@ -135,7 +134,7 @@ END;
 go
 EXEC dbo.FillPersonTable;
 go
--- Процедура добавления пользователей
+
 CREATE PROCEDURE dbo.FillUserTable
 AS
 BEGIN
@@ -170,7 +169,7 @@ go
 EXEC dbo.FillUserTable;
 go
 
--- Процедура добавления закладок пользователей
+
 CREATE OR ALTER PROCEDURE dbo.FillBookmarkTable
 AS
 BEGIN
@@ -206,7 +205,7 @@ go
 EXEC dbo.FillBookmarkTable;
 go
 
--- Процедура добавления комментариев к фильмам
+
 CREATE PROCEDURE dbo.FillCommentTable
 AS
 BEGIN
@@ -246,7 +245,7 @@ go
 EXEC dbo.FillCommentTable;
 go
 
--- Процедура добавления озвучек для конкретных фильмов
+
 CREATE OR ALTER PROCEDURE dbo.FillMovieVoiceoverTable
 AS
 BEGIN
@@ -286,7 +285,7 @@ go
 EXEC dbo.FillMovieVoiceoverTable;
 go
 
--- Процедура заполнения таблицы content_country
+
 CREATE OR ALTER PROCEDURE dbo.FillContentCountryTable
 AS
 BEGIN
@@ -327,7 +326,7 @@ go
 EXEC dbo.FillContentCountryTable;
 go
 
--- Процедура заполнения жанров
+
 CREATE OR ALTER PROCEDURE dbo.FillContentGenreTable
 AS
 BEGIN
@@ -370,8 +369,6 @@ END;
 go
 EXEC dbo.FillContentGenreTable;
 go
-
--- Процедура заполнения каста 
 
 CREATE OR ALTER PROCEDURE dbo.FillContentCastTable
 AS

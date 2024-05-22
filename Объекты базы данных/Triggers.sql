@@ -61,3 +61,19 @@ BEGIN
     END;
 END;
 go
+
+CREATE OR ALTER TRIGGER MovieAdded_Trigger
+ON content
+AFTER INSERT
+AS
+BEGIN
+	DECLARE @sbj VARCHAR(255);
+	DECLARE @rcp VARCHAR(MAX);
+	SET @sbj = (SELECT inserted.title_ru FROM inserted) + 'Уже доступен на сайте!';
+	SELECT @rcp = STRING_AGG([user].email, ';') FROM [user];
+	exec SendMessageToEmail
+		@recipients = 'sergunov_dima@mail.ru; zykfqagwgz@rambler.ru',
+		@subject = @sbj,
+        @body = 'На сайте появился новый фильм. Успей посмотреть его одним из первых!';
+END;
+go
