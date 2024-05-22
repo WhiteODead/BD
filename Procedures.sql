@@ -447,3 +447,20 @@ BEGIN
                '-c -S DESKTOP-NQBTK7E -d online-cinema-backup -T';
     EXEC sys.XP_CMDSHELL @sql;
 END;
+go
+CREATE OR ALTER PROCEDURE ImportUsersFromXML
+AS
+BEGIN
+    DECLARE @XMLData XML;
+	declare @h int = 0;
+	SET @XMLData = (
+		SELECT *
+		FROM OPENROWSET(
+		BULK 'E:\user.xml',
+				SINGLE_BLOB
+		) AS x )
+	exec sp_xml_preparedocument @h output, @XMLData;
+    select * from openxml(@h, '/Users/User', 0)
+    exec sp_xml_removedocument @h;    
+END;
+go
